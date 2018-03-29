@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Auth\LoginController@showLoginForm') ->name('login');
+Route::get('/practice/index', "PracticeController@index");
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
