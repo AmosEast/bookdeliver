@@ -117,4 +117,9 @@ return [
 
     ],
 
+    /**
+     * 自定义一些数据库常用值
+     */
+    'defaultUserPwd' =>'neuq2018',
+
 ];
