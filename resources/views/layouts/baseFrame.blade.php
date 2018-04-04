@@ -13,7 +13,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}" defer></script>
     <script src="{{ asset('js/bootstrap.min.js') }}" defer></script>
-    @yield('js-link-part')
+@yield('js-link-part')
 
 <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -31,14 +31,14 @@
     @yield('css-text-part')
 </head>
 <body>
-<div id="app" class="container-fluid" style="padding-left: 0; padding-right: 0; background-color: #f4f8fb;">
+<div id="app" class="container-fluid" style="padding-left: 0; padding-right: 0; background-color: #f9f9f9; min-height: 600px;">
     <!-- 主页面 -->
-    <div id="main" class="container-fluid">
+    <div id="main" class="container-fluid" style="height: 100%; margin-top: 20px;">
         @yield('content')
     </div>
 </div>
 
-@yield('js-text-part')
+@yield('js-part')
 
 </body>
 </html>

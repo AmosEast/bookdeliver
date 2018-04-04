@@ -31,7 +31,7 @@
     @yield('css-text-part')
 </head>
 <body>
-<div id="app" class="container-fluid" style="padding-left: 0; padding-right: 0; background-color: #f4f8fb;">
+<div id="app" class="container-fluid" style="padding-left: 0; padding-right: 0; background-color: #f4f8fb; min-height:600px;">
     <!-- 顶端导航栏 -->
     <div id="top-navbar">
         <nav class="navbar navbar-default" style="background-color: #ffffff; margin-bottom: 0;">
@@ -78,8 +78,7 @@
             </div>
         </nav>
     </div>
-
-    <div id="main" class="container-fluid">
+    <div id="main" class="container-fluid" style="min-height: 600px; padding: 0;">
         @yield('content')
     </div>
 </div>
