@@ -83,7 +83,7 @@
     </div>
 </div>
 
-@yield('js-part')
+@yield('js-text-part')
 
 </body>
 </html>

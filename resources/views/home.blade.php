@@ -39,8 +39,8 @@
                     <a href="#system-manage" class="nav-header" data-toggle="collapse" style="font-size: 1.3em;"><span class="glyphicon glyphicon-cog"></span> &nbsp;&nbsp;&nbsp;系统管理</a>
                     <ul id="system-manage" class="nav nav-list collapse" style="font-size: 1.1em;">
                         <li><a href="/"><span style="margin-left: 23%;">流程管理</span></a></li>
-                        <li><a href="/"><span style="margin-left: 23%;">角色管理</span></a></li>
-                        <li><a href="/"><span style="margin-left: 23%;">权限管理</span></a></li>
+                        <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('rolesmanage.index') }}')"><span style="margin-left: 23%;">角色管理</span></a></li>
+                        <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('permissionsmanage.index') }}')"><span style="margin-left: 23%;">权限管理</span></a></li>
                         <li><a href="/"><span style="margin-left: 23%;">用户管理</span></a></li>
                     </ul>
                 </li>
@@ -49,7 +49,20 @@
     </div>
     <!-- 右边主页面 -->
     <div id="right-main" class="pull-left" style="width:80%;">
-        <iframe id="main-page-iframe" scrolling="yes" width="100%" height="100%" frameborder="0" src="{{ route('rolesmanage.index') }}" style="min-height: 600px;"></iframe>
+        <iframe id="main-page-iframe" scrolling="yes" width="100%" height="100%" frameborder="0" src="" style="min-height: 600px;"></iframe>
     </div>
 </div>
+@endsection
+
+@section('js-text-part')
+    <script type="text/javascript">
+        function changeMainPage(pageUrl) {
+            if(pageUrl == "" || pageUrl == undefined || pageUrl == null) {
+                window.alert('pageUrl不能为空');
+            }
+            else {
+                $("#main-page-iframe").attr("src", pageUrl);
+            }
+        }
+    </script>
 @endsection

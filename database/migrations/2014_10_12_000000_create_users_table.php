@@ -26,6 +26,8 @@ class CreateUsersTable extends Migration
             $table->string('ext', 100) ->nullable() ->comment('备注');
             $table->rememberToken();
             $table->timestamps();
+            $table->bigInteger('creator_id')->nullable(false)->comment('创建者id,users.id');
+            $table->bigInteger('updater_id')->nullable(false)->comment('更新者id,users.id');
             $table->index('name');
             $table->engine='InnoDB';
             $table->charset='utf8';
