@@ -36,14 +36,30 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#system-manage" class="nav-header" data-toggle="collapse" style="font-size: 1.3em;"><span class="glyphicon glyphicon-cog"></span> &nbsp;&nbsp;&nbsp;系统管理</a>
-                    <ul id="system-manage" class="nav nav-list collapse" style="font-size: 1.1em;">
-                        <li><a href="/"><span style="margin-left: 23%;">流程管理</span></a></li>
-                        <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('rolesmanage.index') }}')"><span style="margin-left: 23%;">角色管理</span></a></li>
-                        <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('permissionsmanage.index') }}')"><span style="margin-left: 23%;">权限管理</span></a></li>
-                        <li><a href="/"><span style="margin-left: 23%;">用户管理</span></a></li>
+                    <a href="#education-manage" class="nav-header" data-toggle="collapse" style="font-size: 1.3em;"><span class="glyphicon glyphicon-search"></span> &nbsp;&nbsp;&nbsp;教务管理</a>
+                    <ul id="education-manage" class="nav nav-list collapse" style="font-size: 1.1em;">
+                        <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('classesmanage.index') }}')"><span style="margin-left: 23%;">班级管理</span></a></li>
+                        <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('majorsmanage.index') }}')"><span style="margin-left: 23%;">专业管理</span></a></li>
+                        <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('academiesmanage.index') }}')"><span style="margin-left: 23%;">学院管理</span></a></li>
                     </ul>
                 </li>
+                @if(Auth::user() ->can('rolesmanage@index') || Auth::user() ->can('permissionsmanage@index') || Auth::user() ->can('usersmanage@index'))
+                    <li>
+                        <a href="#system-manage" class="nav-header" data-toggle="collapse" style="font-size: 1.3em;"><span class="glyphicon glyphicon-cog"></span> &nbsp;&nbsp;&nbsp;系统管理</a>
+                        <ul id="system-manage" class="nav nav-list collapse" style="font-size: 1.1em;">
+                            <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('register') }}')"><span style="margin-left: 23%;">流程管理</span></a></li>
+                            @can('rolesmanage@index')
+                                <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('rolesmanage.index') }}')"><span style="margin-left: 23%;">角色管理</span></a></li>
+                            @endcan
+                            @can('permissionsmanage@index')
+                                <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('permissionsmanage.index') }}')"><span style="margin-left: 23%;">权限管理</span></a></li>
+                            @endcan
+                            @can('usersmanage@index')
+                                <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('usersmanage.index') }}')"><span style="margin-left: 23%;">用户管理</span></a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

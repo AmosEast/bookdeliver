@@ -104,6 +104,40 @@
         });
         return false;
     }
+    {{-- ajax提交a标签后带回调方法 --}}
+    function ajaxASubmitWithCallback(requestUrl, successCallbackFunc, failCallbackFunc) {
+        $.ajax({
+            url: requestUrl,
+            async: false,
+            type: "get",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            dataType: "json",
+            error: function () {
+
+            },
+            success: function (data) {
+                if(data.error == false) {
+                    layer.alert('操作成功！', {icon: 1}, function (index) {
+                        layer.close();
+                        successCallbackFunc();
+                    });
+                }
+                else {
+                    var msg = "操作失败！<br />";
+                    for(var i in data.msg) {
+                        msg += data.msg[i] + "<br />";
+                    }
+                    layer.alert(msg, {icon: 2}, function (index) {
+                        layer.close();
+                        failCallbackFunc();
+                    });
+                }
+            }
+        });
+        return false;
+    }
     {{-- 弹窗页面 --}}
     function popIframe(titleStr, frameUrl, width, height) {
         layer.open({
@@ -125,6 +159,17 @@
                 layer.close();
             }
         });
+    }
+    {{-- select的两级联动方法 --}}
+    function selectOnChange(firstSelectId, secondSelectId, selectData) {
+        var jsonObj = $.parseJSON(selectData);
+        var index = $('#' + firstSelectId).val();
+        var secSelOptions = '';
+        for(var i in jsonObj[index]) {
+            secSelOptions += "<option value='" + jsonObj[index][i].id + "'>" + jsonObj[index][i].name + "</option>";
+        }
+        $('#' + secondSelectId).empty();
+        $('#' + secondSelectId).append(secSelOptions);
     }
 </script>
 @yield('js-text-part')

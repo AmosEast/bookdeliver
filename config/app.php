@@ -161,7 +161,10 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //ide插件
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+        //PhpSpreadsheet
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -211,7 +214,23 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Excel' =>Maatwebsite\Excel\Facades\Excel::class,
     ],
 
+    /**
+     * 角色level
+     *
+     * 'level_id' =>'explain'
+     */
+    'roleLevels' =>[
+        '1' =>'超级管理员',
+        '2' =>'普通用户'
+    ],
+
+    /**
+     * 超级管理员level
+     *
+     * 超级管理员拥有系统所有权限，无需权限分配
+     */
+    'superAdminLevel' =>1,
 ];

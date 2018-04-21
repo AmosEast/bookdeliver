@@ -33,7 +33,7 @@
                         <label for="permission_function">权限Function</label>
                         <input type="text" class="form-control" id="permission_function" name="permission_function" value="{{ $permission ->function }}">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group has-warning">
                         <label for="permission_valid">权限状态</label>
                         <select class="form-control" id="permission_valid" name="permission_valid">
                             @if($permission ->is_valid == 1)

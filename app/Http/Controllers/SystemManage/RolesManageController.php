@@ -7,6 +7,7 @@ use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class RolesManageController extends Controller
 {
@@ -19,8 +20,9 @@ class RolesManageController extends Controller
         $pageData = [];
         //查找全部的角色信息
         $pageData['roles'] = Role::join('users', 'roles.updater_id', '=', 'users.id')
-                                   ->select('roles.id', 'roles.name', 'roles.description', 'roles.created_at', 'roles.updated_at', 'roles.is_valid', 'users.name as updater')
+                                   ->select('roles.id', 'roles.name', 'roles.description', 'roles.level', 'roles.created_at', 'roles.updated_at', 'roles.is_valid', 'users.name as updater')
                                    ->get();
+        $pageData['roleLevels'] = config('app.roleLevels');
         return view('systemManage.rolesManage.index') ->with($pageData);
     }
 
@@ -38,12 +40,19 @@ class RolesManageController extends Controller
             'role_name.required' =>'角色名不能为空',
             'role_name.unique' =>'该角色已经存在',
             'role_name.max' =>'角色名超过最大限度',
-            'role_description.max' =>'角色简介超多最大限度'
+            'role_description.max' =>'角色简介超多最大限度',
+            'role_level.required' =>'角色类型不能为空',
+            'role_level.in' =>'角色类型非法'
         ];
         //表单验证
         $validator = \Validator::make($request ->all(), [
             'role_name' =>'bail|required|unique:roles,name|max:128',
-            'role_description' =>'bail|nullable|max:256'
+            'role_description' =>'bail|nullable|max:256',
+            'role_level' =>[
+                'bail',
+                'required',
+                Rule::in(array_keys(config('app.roleLevels'))),
+            ]
         ], $message);
         if($validator ->fails()) {
             $retData['error'] = true;
@@ -54,6 +63,7 @@ class RolesManageController extends Controller
         $role = new Role;
         $role ->name = $request ->role_name;
         $role ->description = $request ->role_description;
+        $role ->level = intval($request ->role_level);
         $role ->creator_id = Auth::id();
         $role ->updater_id = Auth::id();
         if(!$role ->save()) {
