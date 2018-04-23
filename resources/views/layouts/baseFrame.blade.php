@@ -14,6 +14,7 @@
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}" defer></script>
     <script src="{{ asset('js/bootstrap.min.js') }}" defer></script>
     <script src="{{ asset('js/layer/layer.js') }}" defer></script>
+    <script src="{{ asset('js/bootstrap-select.min.js') }}" defer></script>
 @yield('js-link-part')
 
 <!-- Fonts -->
@@ -22,6 +23,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-select.min.css') }}" rel="stylesheet">
     @yield('css-link-part')
     <style>
         div{
@@ -133,6 +135,41 @@
                         layer.close();
                         failCallbackFunc();
                     });
+                }
+            }
+        });
+        return false;
+    }
+    {{-- ajax提交a标签来展示数据 --}}
+    function ajaxASubmitToShowData(requestUrl, glue) {
+        $.ajax({
+            url: requestUrl,
+            async: false,
+            type: "get",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            dataType: "json",
+            error: function () {
+
+            },
+            success: function (data) {
+                if(data.error == false) {
+                    var dataMsg = "";
+                    for(var i in data.data) {
+                         dataMsg += data.data[i] + glue;
+                    }
+                    layer.alert(dataMsg, function (index) {
+                        window.location.reload();
+                        layer.close();
+                    });
+                }
+                else {
+                    var msg = "操作失败！<br />";
+                    for(var i in data.msg) {
+                        msg += data.msg[i] + "<br />";
+                    }
+                    layer.alert(msg, {icon: 2});
                 }
             }
         });

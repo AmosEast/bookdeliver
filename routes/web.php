@@ -72,5 +72,12 @@ Route::group(['prefix' =>'educationmanage', 'namespace' =>'EducationManage'], fu
     Route::post('classesmanage/uploadclasses', 'ClassesManageController@uploadClasses') ->name('classesmanage.uploadclasses');
     Route::get('classesmanage/addClassesFromSession', 'ClassesManageController@addClassesFromSession') ->name('classesmanage.addclassesfromsession');
 
+    //课程管理模块
+    Route::get('coursesmanage/index', 'CoursesManageController@index') ->name('coursesmanage.index');
+    Route::post('coursesmanage/addcourse', 'CoursesManageController@addCourse') ->name('coursesmanage.addcourse');
+    Route::get('coursesmanage/getmajors/{courseId}', 'CoursesManageController@getMajors') ->name('coursesmanage.getmajors');
+    Route::get('coursesmanage/editcourseview/{courseId}', 'coursesManageController@editCourseView') ->name('coursesmanage.editcourseview');
+    Route::post('coursesmanage/updatecourse/{courseId}', 'coursesManageController@updateCourse') ->name('coursesmanage.updatecourse');
+
 });
 

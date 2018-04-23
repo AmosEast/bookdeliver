@@ -41,6 +41,7 @@
                         <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('classesmanage.index') }}')"><span style="margin-left: 23%;">班级管理</span></a></li>
                         <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('majorsmanage.index') }}')"><span style="margin-left: 23%;">专业管理</span></a></li>
                         <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('academiesmanage.index') }}')"><span style="margin-left: 23%;">学院管理</span></a></li>
+                        <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('coursesmanage.index') }}')"><span style="margin-left: 23%;">课程管理</span></a></li>
                     </ul>
                 </li>
                 @if(Auth::user() ->can('rolesmanage@index') || Auth::user() ->can('permissionsmanage@index') || Auth::user() ->can('usersmanage@index'))

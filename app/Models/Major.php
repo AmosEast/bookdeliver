@@ -27,4 +27,14 @@ class Major extends BaseModel
         return $this ->belongsTo(Academy::class, 'academy_id', 'id');
     }
 
+    /**
+     * 获取该专业所有的课程
+     */
+    public function courses() {
+        return $this ->belongsToMany(Course::class, 'major_courses', 'major_id', 'course_id')
+            ->withPivot('id', 'is_valid', 'creator_id', 'updater_id')
+            ->withTimestamps()
+            ->wherePivot('is_valid', '=', 1);
+    }
+
 }

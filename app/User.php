@@ -55,13 +55,6 @@ class User extends Authenticatable
     }
 
     /**
-     * 获得拥有该用户的模型
-     */
-    public function belongs() {
-        return $this ->morphTo();
-    }
-
-    /**
      * 判断用户是否拥有某一角色
      */
     public function hasRole($role) {
