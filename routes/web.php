@@ -79,5 +79,12 @@ Route::group(['prefix' =>'educationmanage', 'namespace' =>'EducationManage'], fu
     Route::get('coursesmanage/editcourseview/{courseId}', 'coursesManageController@editCourseView') ->name('coursesmanage.editcourseview');
     Route::post('coursesmanage/updatecourse/{courseId}', 'coursesManageController@updateCourse') ->name('coursesmanage.updatecourse');
 
+    //书籍管理模块
+    Route::get('booksmanage/index', 'booksManageController@index') ->name('booksmanage.index');
+    Route::get('booksmanage/addbookview', 'booksManageController@addBookView') ->name('booksmanage.addbookview');
+    Route::post('booksmanage/addbook', 'booksManageController@addBook') ->name('booksmanage.addbook');
+    Route::get('booksmanage/editbookview/{bookId}', 'booksManageController@editBookView') ->name('booksmanage.editbookview');
+    Route::post('booksmanage/editbook/{bookId}', 'booksManageController@editBook') ->name('booksmanage.editbook');
+
 });
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\BaseModel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Console\Presets\Bootstrap;
 
 class Course extends BaseModel
 {
@@ -39,6 +40,13 @@ class Course extends BaseModel
             ->withPivot('id', 'is_valid', 'creator_id', 'updater_id')
             ->withTimestamps()
             ->wherePivot('is_valid', '=', 1);
+    }
+
+    /**
+     * 获取该课程的所有书籍
+     */
+    public function books() {
+        return $this ->hasMany(Book::class, 'course_id', 'id');
     }
 
 }
