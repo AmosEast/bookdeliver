@@ -44,7 +44,7 @@
                             <td>{{ $academy ->created_at }}</td>
                             <td>{{ $academy ->updated_at }}</td>
                             <td>{{ $academy ->updater }}</td>
-                            <td><a href="javascript:void(0);" class="btn btn-primary brn-xs" onclick="popIframeWithCloseFunc('编辑学院信息', '{{ route('academiesmanage.editacademyview', ['academyId' =>$academy ->id]) }}', '675px', '535px', clickXFunc)">编辑</a></td>
+                            <td><a href="javascript:void(0);" class="btn btn-primary btn-sm" onclick="popIframeWithCloseFunc('编辑学院信息', '{{ route('academiesmanage.editacademyview', ['academyId' =>$academy ->id]) }}', '675px', '535px', clickXFunc)">编辑</a></td>
                         </tr>
                     @endforeach
                 @endif

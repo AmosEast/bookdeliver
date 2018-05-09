@@ -27,9 +27,17 @@ class Book extends BaseModel
 
 
     /**
-     * 获取该书籍的所有课程
+     * 获取该书籍的课程
      */
     public function course() {
         return $this ->belongsTo(Course::class, 'course_id', 'id');
+    }
+
+    /**
+     * 获取该书籍的所有订单
+     */
+    public function orders() {
+        return $this ->hasMany(Order::class, 'book_id', 'id')
+            ->where('orders.is_valid', '=', true);
     }
 }

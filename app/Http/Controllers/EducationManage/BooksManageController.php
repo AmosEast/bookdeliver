@@ -229,4 +229,25 @@ class BooksManageController extends Controller
         }
 
     }
+
+    /**
+     * 查看一本书的信息
+     */
+    public function getBookInfo($bookId) {
+        $pageData = [
+            'error' =>false,
+            'msg' =>''
+        ];
+        $book = Book::with(['creator:users.id,users.name', 'updater:users.id,users.name']) ->find($bookId);
+        if($book) {
+            $pageData['book'] = $book;
+            $pageData['typeMeaning'] = Book::getBookTypeMeaning();
+        }
+        else {
+            $pageData['error'] = true;
+            $pageData['msg'] = '该书不存在！';
+        }
+        return view('educationManage.booksManage.bookInfo') ->with($pageData);
+
+    }
 }

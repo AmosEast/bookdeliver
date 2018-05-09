@@ -175,6 +175,39 @@
         });
         return false;
     }
+    {{-- 在确认信息后提交a标签 --}}
+    function ajaxASubmitAfterConfirm(msg, requestUrl) {
+        layer.confirm(msg, {icon: 3, title:'提示'}, function (index) {
+            layer.close(index);
+            $.ajax({
+                url: requestUrl,
+                async: false,
+                type: "get",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+                dataType: "json",
+                error: function () {
+
+                },
+                success: function (data) {
+                    if(data.error == false) {
+                        layer.alert('操作成功！', {icon: 1}, function (index) {
+                            window.location.reload();
+                            layer.close();
+                        });
+                    }
+                    else {
+                        var msg = "操作失败！<br />";
+                        for(var i in data.msg) {
+                            msg += data.msg[i] + "<br />";
+                        }
+                        layer.alert(msg, {icon: 2});
+                    }
+                }
+            });
+        })
+    }
     {{-- 弹窗页面 --}}
     function popIframe(titleStr, frameUrl, width, height) {
         layer.open({
@@ -207,6 +240,21 @@
         }
         $('#' + secondSelectId).empty();
         $('#' + secondSelectId).append(secSelOptions);
+        $('#' + secondSelectId).selectpicker('refresh');
+    }
+    {{-- 实现checkbox做全选和全不选的方法 controlId必须是一个checkbox --}}
+    function selectAll(controlId, oddName) {
+        var controlBox = $('#' + controlId);
+        if(controlBox.is(':checked')) {
+            $('input[name="' + oddName + '"]').each(function () {
+                $(this).prop('checked', true);
+            })
+        }
+        else {
+            $('input[name="' + oddName + '"]').each(function () {
+                $(this).prop('checked', false);
+            })
+        }
     }
 </script>
 @yield('js-text-part')

@@ -31,12 +31,12 @@
                         <th>{{ $user ->is_valid ? '可用':'禁用' }}</th>
                         <th>{{ $user ->updated_at }}</th>
                         <th>
-                            <a href="javascript:void(0);" class="btn btn-success brn-xs" onclick="">详细信息</a>
-                            <a href="javascript:void(0);" class="btn btn-danger brn-xs" onclick="">修改信息</a>
-                            <a href="javascript:void(0);" class="btn btn-danger brn-xs" onclick="confirmResetPassword('{{ $user ->name }}', '{{ route('usersmanage.resetpassword', ['userId' =>$user ->id]) }}')">重置密码</a>
+                            <a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="">详细信息</a>
+                            <a href="javascript:void(0);" class="btn btn-danger btn-sm" onclick="">修改信息</a>
+                            <a href="javascript:void(0);" class="btn btn-danger btn-sm" onclick="confirmResetPassword('{{ $user ->name }}', '{{ route('usersmanage.resetpassword', ['userId' =>$user ->id]) }}')">重置密码</a>
                         </th>
                         <th>
-                            <a href="javascript:void(0);" class="btn btn-primary brn-xs" onclick="popIframe('角色控制', '{{ route('usersmanage.userroles', ['userId' =>$user ->id]) }}', '1015px', '535px')">角色控制</a>
+                            <a href="javascript:void(0);" class="btn btn-primary btn-sm" onclick="popIframe('角色控制', '{{ route('usersmanage.userroles', ['userId' =>$user ->id]) }}', '1015px', '535px')">角色控制</a>
                         </th>
 
                     </tr>

@@ -37,6 +37,7 @@ class Course extends BaseModel
      */
     public function majors() {
         return $this ->belongsToMany(Major::class, 'major_courses', 'course_id', 'major_id')
+            ->where('majors.is_valid', '=', 1)
             ->withPivot('id', 'is_valid', 'creator_id', 'updater_id')
             ->withTimestamps()
             ->wherePivot('is_valid', '=', 1);
@@ -46,7 +47,16 @@ class Course extends BaseModel
      * 获取该课程的所有书籍
      */
     public function books() {
-        return $this ->hasMany(Book::class, 'course_id', 'id');
+        return $this ->hasMany(Book::class, 'course_id', 'id')
+            ->where('books.is_valid', '=', 1);
+    }
+
+    /**
+     * 获取该课程的所有选书安排
+     */
+    public function selectLists() {
+        return $this ->hasMany(SelectList::class, 'course_id', 'id')
+            ->where('select_lists.is_valid', '=', 1);
     }
 
 }

@@ -44,11 +44,11 @@
                             <td>{{ $course ->id }}</td>
                             <td>{{ $course ->name }}</td>
                             <td>{{ $course ->description }}</td>
-                            <td><a href="javascript:void(0);" class="btn btn-link brn-xs" onclick="ajaxASubmitToShowData('{{ route('coursesmanage.getmajors', ['courseId' =>$course ->id]) }}', '<br />')">详情</a></td>
+                            <td><a href="javascript:void(0);" class="btn btn-link btn-sm" onclick="ajaxASubmitToShowData('{{ route('coursesmanage.getmajors', ['courseId' =>$course ->id]) }}', '<br />')">详情</a></td>
                             <td>{{ $course ->is_valid == 1 ? '启用':'弃用' }}</td>
                             <td>{{ $course ->updated_at }}</td>
                             <td>{{ $course ->updater ->name }}</td>
-                            <td><a href="javascript:void(0);" class="btn btn-primary brn-xs" onclick="popIframeWithCloseFunc('编辑课程信息', '{{ route('coursesmanage.editcourseview', ['courseId' =>$course ->id]) }}', '675px', '535px', clickXFunc)">编辑</a></td>
+                            <td><a href="javascript:void(0);" class="btn btn-primary btn-sm" onclick="popIframeWithCloseFunc('编辑课程信息', '{{ route('coursesmanage.editcourseview', ['courseId' =>$course ->id]) }}', '675px', '535px', clickXFunc)">编辑</a></td>
                         </tr>
                     @endforeach
                 @endif

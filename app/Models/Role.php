@@ -18,6 +18,7 @@ class Role extends BaseModel
      */
     public function users() {
         return $this ->belongsToMany(User::class, 'user_roles', 'role_id', 'user_id')
+                      ->where('users.is_valid', '=', 1)
                       ->withPivot('id', 'is_valid', 'creator_id', 'updater_id')
                       ->withTimestamps()
                       ->wherePivot('is_valid', '1');
@@ -28,6 +29,7 @@ class Role extends BaseModel
      */
     public function permissions() {
         return $this ->belongsToMany(Permission::class, 'role_permissions', 'role_id', 'permission_id')
+                      ->where('permissions.is_valid', '=', 1)
                       ->withPivot('id', 'is_valid', 'creator_id', 'updater_id')
                       ->withTimestamps()
                       ->wherePivot('is_valid', '1');

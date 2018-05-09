@@ -5,7 +5,9 @@ namespace App;
 use App\Models\Academy;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\School;
 use App\Models\SchoolClass;
+use App\Models\SelectList;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -36,11 +38,13 @@ class User extends Authenticatable
      */
     public static $belong_type_class = 1;
     public static $belong_type_academy = 2;
+    public static $belong_type_school = 3;
 
     public static function getBelongTypeMeaning() {
         return[
             self::$belong_type_class =>'班级',
-            self::$belong_type_academy =>'学院'
+            self::$belong_type_academy =>'学院',
+            self::$belong_type_school =>'学校'
         ];
     }
     /**
@@ -52,6 +56,15 @@ class User extends Authenticatable
             ->withPivot('id', 'is_valid', 'creator_id', 'updater_id')
             ->withTimestamps()
             ->wherePivot('is_valid', '1');
+    }
+
+
+    /**
+     * 获取用户所有的选书安排
+     */
+    public function selectLists() {
+        return $this ->hasMany(SelectList::class, 'selector_id', 'id')
+            ->where('select_lists.is_valid', '=', 1);
     }
 
     /**
@@ -97,6 +110,9 @@ class User extends Authenticatable
                 case self::$belong_type_class: {
                     return SchoolClass::select($selects) ->where('id', $belongId) ->first();
                 }
+                case self::$belong_type_school: {
+                    return School::select($selects) ->where('id', $belongId) ->first();
+                }
                 default :{
                     return null;
                 }
@@ -139,4 +155,25 @@ class User extends Authenticatable
             return $retData;
         }
     }
+
+    /**
+     * 获取用户学院Id
+     */
+    public static function getAcademyId($userId) {
+        $user = self::select('belong_type', 'belong_id') ->where('id', $userId) ->first();
+        switch ($user ->belong_type) {
+            case self::$belong_type_academy: return $user ->belong_id;
+            case self::$belong_type_class: {
+                $schoolClass = SchoolClass::find($user ->belong_id);
+                return $schoolClass ->academy() ->first() ->id;
+            }
+            case self::$belong_type_school: {
+                return 0;
+            }
+            default: {
+                return 0;
+            }
+        }
+    }
+
 }

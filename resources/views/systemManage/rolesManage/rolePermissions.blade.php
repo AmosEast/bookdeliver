@@ -27,7 +27,7 @@
                                 <td>{{ $permission ->permission_description }}</td>
                                 <td>{{ $permission ->pivot ->updated_at }}</td>
                                 <td>
-                                    <a href="javascript:void(0);" class="btn btn-success brn-xs" onclick="ajaxASubmit('{{ route('rolesmanage.removepermission', ['roleId' =>$permission ->pivot ->role_id, 'permissionId' =>$permission ->pivot ->permission_id]) }}')">取消授权</a>
+                                    <a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="ajaxASubmit('{{ route('rolesmanage.removepermission', ['roleId' =>$permission ->pivot ->role_id, 'permissionId' =>$permission ->pivot ->permission_id]) }}')">取消授权</a>
                                 </td>
                             </tr>
                         @endforeach

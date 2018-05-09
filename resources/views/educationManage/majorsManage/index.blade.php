@@ -19,7 +19,7 @@
                 <span>-</span>
                 <div class="form-group">
                     <label class="sr-only" for="major-description">专业简介</label>
-                    <input type="text" class="form-control" id="major-name" name="major_description" placeholder="请输入专业简介">
+                    <input type="text" class="form-control" id="major-description" name="major_description" placeholder="请输入专业简介">
                 </div>
                 <span>-</span>
                 <div class="form-group">
@@ -54,7 +54,7 @@
                             <td>{{ $major ->academy ->name }}</td>
                             <td>{{ $major ->updated_at }}</td>
                             <td>{{ $major ->updater ->name }}</td>
-                            <td><a href="javascript:void(0);" class="btn btn-primary brn-xs" onclick="popIframeWithCloseFunc('编辑专业信息', '{{ route('majorsmanage.editmajorview', ['majorId' =>$major ->id]) }}', '675px', '535px', clickXFunc)">编辑</a></td>
+                            <td><a href="javascript:void(0);" class="btn btn-primary btn-sm" onclick="popIframeWithCloseFunc('编辑专业信息', '{{ route('majorsmanage.editmajorview', ['majorId' =>$major ->id]) }}', '675px', '535px', clickXFunc)">编辑</a></td>
                         </tr>
                     @endforeach
                 @endif

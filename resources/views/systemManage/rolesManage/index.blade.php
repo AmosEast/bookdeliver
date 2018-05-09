@@ -49,13 +49,13 @@
                             <td>{{ $role ->updater }}</td>
                             <td>
                                 @if($role ->is_valid == 1)
-                                    <a href="javascript:void(0);" class="btn btn-danger brn-xs" onclick="ajaxASubmit('{{ route('rolesmanage.disablerole', ['id' =>$role ->id]) }}')">弃用</a>
+                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm" onclick="ajaxASubmit('{{ route('rolesmanage.disablerole', ['id' =>$role ->id]) }}')">弃用</a>
                                 @else
-                                    <a href="javascript:void(0);" class="btn btn-success brn-xs" onclick="ajaxASubmit('{{ route('rolesmanage.startrole', ['id' =>$role ->id]) }}')">启用</a>
+                                    <a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="ajaxASubmit('{{ route('rolesmanage.startrole', ['id' =>$role ->id]) }}')">启用</a>
                                 @endif
                             </td>
                             <td>
-                                <a href="javascript:void(0);" class="btn btn-success brn-xs" onclick="popIframe('权限控制', '{{ route('rolesmanage.rolepermissions', ['id' =>$role ->id]) }}', '1015px', '535px')">权限控制</a>
+                                <a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="popIframe('权限控制', '{{ route('rolesmanage.rolepermissions', ['id' =>$role ->id]) }}', '1015px', '535px')">权限控制</a>
                             </td>
                         </tr>
                     @endforeach

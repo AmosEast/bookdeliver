@@ -17,7 +17,7 @@ class Controller extends BaseController
     protected function getGrades() {
         $grade = date('Y', time());
         $grades = [];
-        for ($i = -5; $i < 3; $i++) {
+        for ($i = -4; $i < 1; $i++) {
             $grades[] = $grade + $i;
         }
         return $grades;

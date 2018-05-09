@@ -17,6 +17,7 @@ class Permission extends BaseModel
      */
     public function roles() {
         return $this ->belongsToMany(Role::class, 'role_permissions', 'permission_id', 'role_id')
+                      ->where('roles.is_valid', '=', 1)
                       ->withPivot('id', 'is_valid', 'creator_id', 'updater_id')
                       ->withTimestamps()
                       ->wherePivot('is_valid', '1');

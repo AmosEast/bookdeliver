@@ -27,7 +27,7 @@
                                 <td>{{ $role ->description }}</td>
                                 <td>{{ $role ->pivot ->updated_at }}</td>
                                 <td>
-                                    <a href="javascript:void(0);" class="btn btn-success brn-xs" onclick="ajaxASubmit('{{ route('usersmanage.removerole', ['userId' =>$role ->pivot ->user_id, 'roleId' =>$role ->pivot ->role_id]) }}')">移除角色</a>
+                                    <a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="ajaxASubmit('{{ route('usersmanage.removerole', ['userId' =>$role ->pivot ->user_id, 'roleId' =>$role ->pivot ->role_id]) }}')">移除角色</a>
                                 </td>
                             </tr>
                         @endforeach

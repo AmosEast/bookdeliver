@@ -32,6 +32,7 @@ class Major extends BaseModel
      */
     public function courses() {
         return $this ->belongsToMany(Course::class, 'major_courses', 'major_id', 'course_id')
+            ->where('courses.is_valid', '=', 1)
             ->withPivot('id', 'is_valid', 'creator_id', 'updater_id')
             ->withTimestamps()
             ->wherePivot('is_valid', '=', 1);

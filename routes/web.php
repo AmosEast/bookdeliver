@@ -85,6 +85,37 @@ Route::group(['prefix' =>'educationmanage', 'namespace' =>'EducationManage'], fu
     Route::post('booksmanage/addbook', 'booksManageController@addBook') ->name('booksmanage.addbook');
     Route::get('booksmanage/editbookview/{bookId}', 'booksManageController@editBookView') ->name('booksmanage.editbookview');
     Route::post('booksmanage/editbook/{bookId}', 'booksManageController@editBook') ->name('booksmanage.editbook');
+    Route::get('booksmanage/getbookinfo/{bookId}', 'booksManageController@getBookInfo') ->name('booksmanage.getbookinfo');
 
 });
 
+//选书管理模块
+Route::group(['prefix' =>'selectmanage', 'namespace' =>'SelectManage'], function (){
+    //任务管理模块
+    Route::get('tasksmanage/index', 'TasksManageController@index') ->name('tasksmanage.index');
+    Route::post('tasksmanage/addtask', 'TasksManageController@addTask') ->name('tasksmanage.addtask');
+    Route::get('tasksmanage/changetaskstatus/{taskId}/{status}', 'TasksManageController@changeTaskStatus') ->name('tasksmanage.changetaskstatus');
+    Route::get('tasksmanage/setselectorview', 'TasksManageController@setSelectorView') ->name('tasksmanage.setselectorview');
+    Route::post('tasksmanage/setselector', 'TasksManageController@setSelector') ->name('tasksmanage.setselector');
+    Route::get('tasksmanage/editselectlistview/{selectId}', 'TasksManageController@editSelectListView') ->name('tasksmanage.editselectlistview');
+    Route::post('tasksmanage/editselectlist/{selectId}', 'tasksManageController@editSelectList') ->name('tasksmanage.editselectlist');
+    Route::get('tasksmanage/selectbooksview', 'tasksManageController@selectBooksView') ->name('tasksmanage.selectbooksview');
+    Route::get('tasksmanage/editselectbooksview/{selectId}', 'tasksManageController@editSelectBooksView') ->name('tasksmanage.editselectbooksview');
+    Route::post('tasksmanage/saveselectbooks/{selectId}', 'tasksManageController@saveSelectBooks') ->name('tasksmanage.saveselectbooks');
+    Route::get('tasksmanage/submitselectlist/{selectId}', 'tasksManageController@submitselectlist') ->name('tasksmanage.submitselectlist');
+    Route::match(['post', 'get'], 'tasksmanage/verifyselectlistsview', 'tasksManageController@verifySelectListsView') ->name('tasksmanage.verifyselectlistsview');
+    Route::post('tasksmanage/batchchangeselectstatus/{selectStatus}', 'tasksManageController@batchChangeSelectStatus') ->name('tasksmanage.batchchangeselectstatus');
+});
+
+//购书管理模块
+Route::group(['prefix' =>'ordermanage', 'namespace' =>'OrderManage'], function (){
+    //教师选书管理模块
+    Route::get('teacherorder/index', 'TeacherOrderController@index') ->name('teacherorder.index');
+    Route::get('teacherorder/orderbooksview/{selectId}', 'TeacherOrderController@orderBooksView') ->name('teacherorder.orderbooksview');
+    Route::post('teacherorder/orderbooks/{selectId}/{taskId}', 'TeacherOrderController@orderBooks') ->name('teacherorder.orderbooks');
+});
+
+//查询管理模块
+Route::group(['prefix' =>'querymanage', 'namespace' =>'QueryManage'], function (){
+    Route::match(['post', 'get'], 'selectquery/index', 'SelectQueryController@index') ->name('selectquery.index');
+});

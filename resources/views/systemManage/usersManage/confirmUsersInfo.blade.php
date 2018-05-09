@@ -33,7 +33,7 @@
                         </tr>
                     @endforeach
                 </table>
-                <a href="javascript:void(0)" class="btn btn-primary brn-xs" onclick="ajaxASubmitWithCallback('{{ route('usersmanage.saveusersfromsession') }}', redirectTo, redirectTo)">确认</a>
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm" onclick="ajaxASubmitWithCallback('{{ route('usersmanage.saveusersfromsession') }}', redirectTo, redirectTo)">确认</a>
             </div>
         </div>
     @endif

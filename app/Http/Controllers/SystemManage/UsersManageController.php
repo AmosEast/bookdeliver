@@ -4,6 +4,7 @@ namespace App\Http\Controllers\SystemManage;
 
 use App\Models\Academy;
 use App\Models\Role;
+use App\Models\School;
 use App\Models\SchoolClass;
 use App\User;
 use Illuminate\Http\Request;
@@ -157,9 +158,14 @@ class UsersManageController extends Controller
         $pageData['academies'] = Academy::select('id', 'name')
             ->where('is_valid', '=', 1)
             ->get();
+        //获取所有学校信息（只有一条）
+        $pageData['schools'] = School::select('id', 'name')
+            ->where('is_valid', '=', 1)
+            ->get();
         $userBelongs = [
             User::$belong_type_class =>$pageData['classes'],
-            User::$belong_type_academy =>$pageData['academies']
+            User::$belong_type_academy =>$pageData['academies'],
+            User::$belong_type_school =>$pageData['schools']
         ];
         $pageData['userBelongs'] = json_encode($userBelongs);
 
@@ -253,9 +259,14 @@ class UsersManageController extends Controller
         $pageData['academies'] = Academy::select('id', 'name')
             ->where('is_valid', '=', 1)
             ->get();
+        //获取所有学校信息
+        $pageData['schools'] = School::select('id', 'name')
+            ->where('is_valid', '=', 1)
+            ->get();
         $userBelongs = [
             User::$belong_type_class =>$pageData['classes'],
-            User::$belong_type_academy =>$pageData['academies']
+            User::$belong_type_academy =>$pageData['academies'],
+            User::$belong_type_school =>$pageData['schools']
         ];
         $pageData['userBelongs'] = json_encode($userBelongs);
 

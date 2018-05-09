@@ -34,7 +34,7 @@
                         @endforeach
                     @endif
                 </table>
-                <a href="javascript:void(0);" class="btn btn-primary brn-xs" style="float: right; margin-right: 8%;" onclick="ajaxASubmitWithCallback('{{ route('classesmanage.addclassesfromsession') }}', redirectTo, redirectTo)">确认添加</a>
+                <a href="javascript:void(0);" class="btn btn-primary btn-sm" style="float: right; margin-right: 8%;" onclick="ajaxASubmitWithCallback('{{ route('classesmanage.addclassesfromsession') }}', redirectTo, redirectTo)">确认添加</a>
             </div>
         </div>
     @endif

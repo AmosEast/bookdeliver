@@ -5,7 +5,7 @@
             <h3>添加书籍</h3>
         </div>
         <div class="panel-body">
-            <a href="javascript:void(0);" class="btn btn-primary brn-xs" onclick="popIframeWithCloseFunc('添加用户', '{{ route('booksmanage.addbookview') }}', '675px', '535px', clickXFunc)">添加书籍</a>
+            <a href="javascript:void(0);" class="btn btn-primary btn-sm" onclick="popIframeWithCloseFunc('添加书籍', '{{ route('booksmanage.addbookview') }}', '675px', '535px', clickXFunc)">添加书籍</a>
         </div>
     </div>
     <div id="list-book-div" class="panel panel-success" style="width: 100%;">
@@ -33,7 +33,7 @@
                             <td>{{ $book ->is_valid == 1 ? '启用':'弃用' }}</td>
                             <td>{{ $book ->updated_at }}</td>
                             <td>{{ $book ->updater ->name }}</td>
-                            <td><a href="javascript:void(0);" class="btn btn-primary brn-xs" onclick="popIframeWithCloseFunc('编辑书籍', '{{ route('booksmanage.editbookview', ['bookId' =>$book ->id]) }}', '675px', '535px', clickXFunc)">编辑</a></td>
+                            <td><a href="javascript:void(0);" class="btn btn-primary btn-sm" onclick="popIframeWithCloseFunc('编辑书籍', '{{ route('booksmanage.editbookview', ['bookId' =>$book ->id]) }}', '675px', '535px', clickXFunc)">编辑</a></td>
                         </tr>
                     @endforeach
                 @endif

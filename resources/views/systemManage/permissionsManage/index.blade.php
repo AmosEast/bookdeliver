@@ -49,7 +49,7 @@
                             <td>{{ $permission ->created_at }}</td>
                             <td>{{ $permission ->updated_at }}</td>
                             <td>{{ $permission ->updater }}</td>
-                            <td><a href="javascript:void(0);" class="btn btn-primary brn-xs" onclick="popIframeWithCloseFunc('编辑权限', '{{ route('permissionsmanage.editpermissionview', ['permissionId' =>$permission ->id]) }}', '675px', '535px', clickXFunc)">编辑</a></td>
+                            <td><a href="javascript:void(0);" class="btn btn-primary btn-sm" onclick="popIframeWithCloseFunc('编辑权限', '{{ route('permissionsmanage.editpermissionview', ['permissionId' =>$permission ->id]) }}', '675px', '535px', clickXFunc)">编辑</a></td>
                         </tr>
                     @endforeach
                 @endif
