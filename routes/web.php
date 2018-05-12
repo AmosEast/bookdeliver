@@ -113,6 +113,15 @@ Route::group(['prefix' =>'ordermanage', 'namespace' =>'OrderManage'], function (
     Route::get('teacherorder/index', 'TeacherOrderController@index') ->name('teacherorder.index');
     Route::get('teacherorder/orderbooksview/{selectId}', 'TeacherOrderController@orderBooksView') ->name('teacherorder.orderbooksview');
     Route::post('teacherorder/orderbooks/{selectId}/{taskId}', 'TeacherOrderController@orderBooks') ->name('teacherorder.orderbooks');
+
+    //学生选书管理模块
+    Route::get('studentorder/index', 'StudentOrderController@index') ->name('studentorder.index');
+    Route::post('studentorder/orderbooks', 'StudentOrderController@orderBooks') ->name('studentorder.orderbooks');
+
+    //班级代选管理模块
+    Route::get('classorder/index', 'classOrderController@index') ->name('classorder.index');
+    Route::post('classorder/orderbooksview', 'classOrderController@orderBooksView') ->name('classorder.orderbooksview');
+    Route::post('classorder/orderbooks', 'classOrderController@orderBooks') ->name('classorder.orderbooks');
 });
 
 //查询管理模块

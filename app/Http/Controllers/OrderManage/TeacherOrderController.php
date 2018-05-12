@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TeacherOrderController extends Controller
 {
@@ -29,6 +30,13 @@ class TeacherOrderController extends Controller
         $perPage = 1;
         //缓存请求数据
         $request ->flash();
+        //检测用户类型
+        $user = Auth::user();
+        if($user ->belong_type != User::$belong_type_academy) {
+            $pageData['error'] = true;
+            $pageData['msg'] = '您的直接归属信息不是学院，无法适用教师订书功能!';
+            return view('orderManage.teacherOrder.index') ->with($pageData);
+        }
         //获取用户学院信息
         $userAcademyId = User::getAcademyId(Auth::id());
         if($userAcademyId <= 0) {
@@ -69,12 +77,15 @@ class TeacherOrderController extends Controller
         }
         //获取当前任务下用户的所有订单
         $orders = Order::with('book:books.id,books.name')
+            ->select(DB::raw('id, select_id, book_id, sum(quantity) as quantity'))
             ->whereIn('task_id', $arrTaskIds)
             ->where([
                 ['orders.user_id', '=', Auth::id()],
                 ['orders.is_valid', '=', 1]
             ])
+            ->groupBy(['select_id', 'book_id'])
             ->get();
+
         $arrSelectIds = $orders ->pluck('select_id') ->toArray();
 
         if($request ->has('select_major') && $request ->select_major) {

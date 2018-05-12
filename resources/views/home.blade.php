@@ -13,31 +13,42 @@
     <div id="left-navbar" class="pull-left" style="width: 20%; min-height: 600px; border-right: 3px solid #ffffff;">
         <div id="left-navbar-main" class="sidebar-nav">
             <ul class="nav nav-list collpse">
-                <li>
-                    <a href="#select-books" class="nav-header" data-toggle="collapse" style="font-size: 1.3em;"><span class="glyphicon glyphicon-pencil"></span> &nbsp;&nbsp;&nbsp;选书模块</a>
-                    <ul id="select-books" class="nav nav-list collapse" style="font-size: 1.1em;">
-                        @can('tasksmanage@index')
-                            <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('tasksmanage.index') }}')"><span style="margin-left: 23%;">任务管理</span></a></li>
-                        @endcan
-                        @can('tasksmanage@setselectorview')
-                            <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('tasksmanage.setselectorview') }}')"><span style="margin-left: 23%;">选书分配</span></a></li>
-                        @endcan
-                        @can('tasksmanage@selectbooksview')
-                            <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('tasksmanage.selectbooksview') }}')"><span style="margin-left: 23%;">书籍选择</span></a></li>
-                        @endcan
-                        @can('tasksmanage@verifyselectlistsview')
-                            <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('tasksmanage.verifyselectlistsview') }}')"><span style="margin-left: 23%;">选书审核</span></a></li>
-                        @endcan
-                    </ul>
-                </li>
-                <li>
-                    <a href="#order-books" class="nav-header" data-toggle="collapse" style="font-size: 1.3em;"><span class="glyphicon glyphicon-fire"></span> &nbsp;&nbsp;&nbsp;购书模块</a>
-                    <ul id="order-books" class="nav nav-list collapse" style="font-size: 1.1em;">
-                        <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('teacherorder.index') }}')"><span style="margin-left: 23%;">教师购书</span></a></li>
-                        <li><a href="/"><span style="margin-left: 23%;">学生购书</span></a></li>
-                        <li><a href="/"><span style="margin-left: 23%;">班级代购</span></a></li>
-                    </ul>
-                </li>
+                @if(Auth::user() ->can('tasksmanage@index') || Auth::user() ->can('tasksmanage@setselectorview') || Auth::user() ->can('tasksmanage@selectbooksview') || Auth::user() ->can('tasksmanage@verifyselectlistsview'))
+                    <li>
+                        <a href="#select-books" class="nav-header" data-toggle="collapse" style="font-size: 1.3em;"><span class="glyphicon glyphicon-pencil"></span> &nbsp;&nbsp;&nbsp;选书模块</a>
+                        <ul id="select-books" class="nav nav-list collapse" style="font-size: 1.1em;">
+                            @can('tasksmanage@index')
+                                <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('tasksmanage.index') }}')"><span style="margin-left: 23%;">任务管理</span></a></li>
+                            @endcan
+                            @can('tasksmanage@setselectorview')
+                                <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('tasksmanage.setselectorview') }}')"><span style="margin-left: 23%;">选书分配</span></a></li>
+                            @endcan
+                            @can('tasksmanage@selectbooksview')
+                                <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('tasksmanage.selectbooksview') }}')"><span style="margin-left: 23%;">书籍选择</span></a></li>
+                            @endcan
+                            @can('tasksmanage@verifyselectlistsview')
+                                <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('tasksmanage.verifyselectlistsview') }}')"><span style="margin-left: 23%;">选书审核</span></a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endif
+                @if(Auth::user() ->can('teacherorder@index') || Auth::user() ->can('studentorder@index') || Auth::user() ->can('classorder@index'))
+                    <li>
+                        <a href="#order-books" class="nav-header" data-toggle="collapse" style="font-size: 1.3em;"><span class="glyphicon glyphicon-fire"></span> &nbsp;&nbsp;&nbsp;购书模块</a>
+                        <ul id="order-books" class="nav nav-list collapse" style="font-size: 1.1em;">
+                            @can('teacherorder@index')
+                                <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('teacherorder.index') }}')"><span style="margin-left: 23%;">教师购书</span></a></li>
+                            @endcan
+
+                            @can('studentorder@index')
+                                <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('studentorder.index') }}')"><span style="margin-left: 23%;">学生购书</span></a></li>
+                            @endcan
+                            @can('classorder@index')
+                                <li><a href="javascript:void(0)" onclick="changeMainPage('{{ route('classorder.index') }}')"><span style="margin-left: 23%;">班级代购</span></a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endif
                 <li>
                     <a href="#deliver-books" class="nav-header" data-toggle="collapse" style="font-size: 1.3em;"><span class="glyphicon glyphicon-book"></span> &nbsp;&nbsp;&nbsp;发书模块</a>
                     <ul id="deliver-books" class="nav nav-list collapse" style="font-size: 1.1em;">
@@ -51,7 +62,9 @@
                         @can('selectquery@index')
                             <li><a href="javascript:void(0);" onclick="changeMainPage('{{ route('selectquery.index') }}')"><span style="margin-left: 23%;">选书状态查询</span></a></li>
                         @endcan
-                        <li><a href="/"><span style="margin-left: 23%;">订书状态查询</span></a></li>
+
+                        <li><a href="/"><span style="margin-left: 23%;">订书详情查询</span></a></li><li><a href="/"><span style="margin-left: 23%;">订书详情查询</span></a></li>
+                        <li><a href="/"><span style="margin-left: 23%;">订书数量统计</span></a></li>
                         <li><a href="/"><span style="margin-left: 23%;">发书状态查询</span></a></li>
                         <li><a href="/"><span style="margin-left: 23%;">书单数量查询</span></a></li>
                     </ul>

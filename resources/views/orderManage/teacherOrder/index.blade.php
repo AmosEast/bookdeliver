@@ -10,10 +10,10 @@
             </div>
         </div>
     @else
-        {{--当前审核列表 --}}
+        {{--当前选书列表 --}}
         <div id="list-selectlist-div" class="panel panel-success" style="width: 100%;">
             <div class="panel-heading">
-                <h3>选书审核状态列表</h3>
+                <h3>选书列表</h3>
             </div>
             <div class="panel-body table-responsive">
                 <div class="panel">
@@ -35,7 +35,7 @@
                                 <select name="select_has_ordered" id="select_has_ordered" class="form-control" title="请选择购书状态">
                                     <option value="0">请选择购书状态</option>
                                     <option value="1" @if(old('select_has_ordered') == 1) selected @endif>已购书籍</option>
-                                    <option value="-1" @if(old('select_has_ordered') == 1) selected @endif>未购书籍</option>
+                                    <option value="-1" @if(old('select_has_ordered') == -1) selected @endif>未购书籍</option>
                                 </select>
                             </div>
                             <span>-</span>

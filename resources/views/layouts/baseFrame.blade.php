@@ -30,6 +30,27 @@
             padding: 0;
             margin: 0;
         }
+        .table-center{
+            text-align: center !important;
+            vertical-align: middle !important;
+        }
+        .table-center th{
+            text-align: center !important;
+            vertical-align: middle !important;
+        }
+        .table-center td {
+            text-align: center !important;
+            vertical-align: middle !important;
+        }
+        .table-border-my {
+            border: 1px solid gray !important;
+        }
+        .table-border-my tr th{
+            border: 1px solid gray !important;
+        }
+        .table-border-my tr td{
+            border: 1px solid gray !important;
+        }
     </style>
     @yield('css-text-part')
 </head>
@@ -70,6 +91,42 @@
                         msg += data.msg[i] + "<br />";
                     }
                     layer.alert(msg, {icon: 2});
+                }
+            }
+        });
+        return false;
+    }
+    {{-- ajax提交表单方法后带回调方法 --}}
+    function ajaxFormSubmitWithCallback(formId, successCallbackFunc, failCallbackFunc) {
+        var form = $("#" + formId);
+        $.ajax({
+            url: form.attr("action"),
+            async: false,
+            type: form.attr("method"),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            data: form.serialize(),
+            dataType: "json",
+            error: function () {
+
+            },
+            success: function (data) {
+                if(data.error == false) {
+                    layer.alert('操作成功！', {icon: 1}, function (index) {
+                        layer.close();
+                        successCallbackFunc();
+                    });
+                }
+                else {
+                    var msg = "操作失败！<br />";
+                    for(var i in data.msg) {
+                        msg += data.msg[i] + "<br />";
+                    }
+                    layer.alert(msg, {icon: 2}, function (index) {
+                        layer.close();
+                        failCallbackFunc();
+                    });
                 }
             }
         });
